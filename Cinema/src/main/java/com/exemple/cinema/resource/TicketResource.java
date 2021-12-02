@@ -12,22 +12,22 @@ import java.util.List;
 public class TicketResource {
     private final TicketService ticketService;
 
-    public TicketResource(TicketService ticketService) {
+    public TicketResource(final TicketService ticketService) {
         this.ticketService = ticketService;
     }
 
     @PostMapping("/ticket/")
-    public TicketDto createTicket(@RequestBody TicketDto ticketDto) {
+    public TicketDto createTicket(@RequestBody final TicketDto ticketDto) {
         return ticketService.createTicket(ticketDto);
     }
 
     @GetMapping("/ticket/{id}")
-    public TicketDto getTicketById(@PathVariable Long id) {
+    public TicketDto getTicketById(@PathVariable final Long id) {
         return ticketService.getTicketById(id);
     }
 
     @GetMapping("/ticket/order_id/{id}")
-    public List<TicketDto> getTicketsByOrderId(@PathVariable Long id) {
+    public List<TicketDto> getTicketsByOrderId(@PathVariable final Long id) {
         return ticketService.getTicketsByOrderId(id);
     }
 
@@ -37,17 +37,17 @@ public class TicketResource {
     }
 
     @GetMapping("/ticket/addToOrder/{orderId}/ticket/{ticketId}")
-    public OrderDto addTicketToOrder(@PathVariable Long orderId, @PathVariable Long ticketId){
+    public OrderDto addTicketToOrder(@PathVariable final Long orderId, @PathVariable final Long ticketId){
         return ticketService.addTicketToOrder(orderId, ticketId);
     }
 
     @PutMapping("/ticket/")
-    public TicketDto updateTicket(@RequestBody TicketDto ticketDto) {
+    public TicketDto updateTicket(@RequestBody final TicketDto ticketDto) {
         return ticketService.updateTicket(ticketDto);
     }
 
     @DeleteMapping("/ticket/{id}")
-    public List<TicketDto> deleteTicket(@PathVariable Long id) {
+    public List<TicketDto> deleteTicket(@PathVariable final Long id) {
         return ticketService.deleteTicketById(id);
     }
 }

@@ -62,7 +62,7 @@ public class TicketRepository {
     }
 
     public Ticket getById(final Long id){
-        Ticket ticket = ticketList.stream()
+        final Ticket ticket = ticketList.stream()
                 .filter((e -> e.getId().equals(id)))
                 .findFirst()
                 .orElseThrow(()-> new ServiceException(400,"Ticket not found",null));
@@ -77,7 +77,7 @@ public class TicketRepository {
         return ticket;
     }
 
-    public Ticket update(Ticket ticket) {
+    public Ticket update(final Ticket ticket) {
         final Ticket oldTicket = getById(ticket.getId());
         if (oldTicket==null){
             throw new ServiceException(400,"Ticket not found", null);
@@ -89,7 +89,7 @@ public class TicketRepository {
     }
 
     public  List<Ticket> delete(final Long id){
-        Ticket ticket = getById(id);
+        final Ticket ticket = getById(id);
         if(ticket==null){
             throw new ServiceException(400, "Ticket not found", null);
         }

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TicketMapper {
-    public Ticket toEntity(TicketDto ticketDto) {
-        Ticket ticket = new Ticket();
+    public Ticket toEntity(final TicketDto ticketDto) {
+        final Ticket ticket = new Ticket();
         ticket.setId(ticketDto.getId());
         ticket.setFilmName(ticketDto.getFilmName());
         ticket.setPrice(ticketDto.getPrice());
@@ -17,8 +17,8 @@ public class TicketMapper {
         return ticket;
     }
 
-    public TicketDto toDTO(Ticket ticket) {
-        TicketDto ticketDto = new TicketDto();
+    public TicketDto toDTO(final Ticket ticket) {
+        final TicketDto ticketDto = new TicketDto();
         ticketDto.setId(ticket.getId());
         ticketDto.setFilmName(ticket.getFilmName());
         ticketDto.setPrice(ticket.getPrice());

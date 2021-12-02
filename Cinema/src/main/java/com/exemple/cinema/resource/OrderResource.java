@@ -11,17 +11,17 @@ import java.util.List;
 public class OrderResource {
     private final OrderService orderService;
 
-    public OrderResource(OrderService orderService) {
+    public OrderResource(final OrderService orderService) {
         this.orderService = orderService;
     }
 
     @PostMapping("/order/")
-    public OrderDto createOrder(@RequestBody OrderDto orderDto) {
+    public OrderDto createOrder(@RequestBody final OrderDto orderDto) {
         return orderService.createOrder(orderDto);
     }
 
     @GetMapping("/order/{id}")
-    public OrderDto getById(@PathVariable Long id) {
+    public OrderDto getById(@PathVariable final Long id) {
         return orderService.getById(id);
     }
 
@@ -31,12 +31,12 @@ public class OrderResource {
     }
 
     @GetMapping("/order/user/{userId}")
-    public List<OrderDto> getAllByUserId(@PathVariable Long userId) {
+    public List<OrderDto> getAllByUserId(@PathVariable final Long userId) {
         return orderService.getAllByUserId(userId);
     }
 
     @PutMapping("/order/")
-    public OrderDto updateOrder(@RequestBody OrderDto orderDto) {
+    public OrderDto updateOrder(@RequestBody final OrderDto orderDto) {
         return orderService.updateOrder(orderDto);
     }
 }

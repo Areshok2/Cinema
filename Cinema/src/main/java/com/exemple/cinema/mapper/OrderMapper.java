@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OrderMapper {
-    public OrderDto toDTO(Order order, User user) {
+    public OrderDto toDTO(final Order order, final User user) {
         final OrderDto orderDTO = new OrderDto();
 
         orderDTO.setId(order.getId());
@@ -26,7 +26,7 @@ public class OrderMapper {
         return orderDTO;
     }
 
-    public Order toEntity(OrderDto orderDTO) {
+    public Order toEntity(final OrderDto orderDTO) {
         final Order order = new Order();
 
         order.setId(orderDTO.getId());

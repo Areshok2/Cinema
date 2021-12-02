@@ -14,36 +14,36 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
 
-    public UserServiceImpl(UserRepository userRepository, UserMapper userMapper) {
+    public UserServiceImpl(final UserRepository userRepository, final UserMapper userMapper) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
     }
 
     @Override
-    public UserDto createUser(UserDto userDto) {
-        User user = userMapper.toEntity(userDto);
+    public UserDto createUser(final UserDto userDto) {
+        final User user = userMapper.toEntity(userDto);
         return userMapper.toDTO(userRepository.save(user));
     }
 
     @Override
     public List<UserDto> getAll() {
-        List<User> all = userRepository.getAll();
+        final List<User> all = userRepository.getAll();
         return  all.stream().map(userMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
-    public UserDto getUserById(Long id) {
+    public UserDto getUserById(final Long id) {
         return userMapper.toDTO(userRepository.getById(id));
     }
 
     @Override
-    public UserDto updateUser(UserDto userDto){
-        User user = userMapper.toEntity(userDto);
+    public UserDto updateUser(final UserDto userDto){
+        final User user = userMapper.toEntity(userDto);
        return userMapper.toDTO(userRepository.update(user));
     }
 
     @Override
-    public List<UserDto> deleteUser(Long id){
+    public List<UserDto> deleteUser(final Long id){
         return userRepository.delete(id).stream().map(userMapper::toDTO).collect(Collectors.toList());
     }
 }

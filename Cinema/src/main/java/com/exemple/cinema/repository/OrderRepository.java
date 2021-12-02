@@ -61,15 +61,15 @@ public class OrderRepository {
         return orderList;
     }
 
-    public Order save(Order order) {
+    public Order save(final Order order) {
         ++lastId;
         order.setId(lastId);
         orderList.add(order);
         return order;
     }
 
-    public Order getById(Long id) {
-        Order order = orderList.stream()
+    public Order getById(final Long id) {
+        final Order order = orderList.stream()
                 .filter((e -> e.getId().equals(id)))
                 .findFirst()
                 .orElseThrow(()-> new ServiceException(400,"User not found",null));
@@ -77,7 +77,7 @@ public class OrderRepository {
         return order;
     }
 
-    public Order update(Order order) {
+    public Order update(final Order order) {
         if (order.getId()==null){
             throw new ServiceException(400,"Order not found", null);
         }
@@ -87,7 +87,7 @@ public class OrderRepository {
         return order;
     }
 
-    public List<Order> getByUserId(Long userId) {
+    public List<Order> getByUserId(final Long userId) {
         return orderList.stream().filter((o) -> o.getUserId().equals(userId)).collect(Collectors.toList());
     }
 }

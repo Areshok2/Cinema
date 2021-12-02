@@ -61,7 +61,7 @@ public class UserRepository {
         return userList;
     }
 
-    public User save(User user) {
+    public User save(final User user) {
         ++lastId;
         user.setId(lastId);
         userList.add(user);
@@ -69,8 +69,8 @@ public class UserRepository {
         return user;
     }
 
-    public User getById(Long id) {
-        User user = userList.stream()
+    public User getById(final Long id) {
+        final User user = userList.stream()
                 .filter((e -> e.getId().equals(id)))
                 .findFirst()
                 .orElseThrow(() -> new ServiceException(400, "Usser not found", null));
@@ -78,7 +78,7 @@ public class UserRepository {
         return user;
     }
 
-    public User update(User user) {
+    public User update(final User user) {
         final User oldTicket = getById(user.getId());
         if (oldTicket==null){
             throw new ServiceException(400,"User not found", null);
@@ -90,7 +90,7 @@ public class UserRepository {
     }
 
     public  List<User> delete(final Long id){
-        User user = getById(id);
+        final User user = getById(id);
         if(user==null){
             throw new ServiceException(400, "User not found", null);
         }

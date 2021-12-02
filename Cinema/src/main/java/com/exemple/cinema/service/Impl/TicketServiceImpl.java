@@ -27,7 +27,7 @@ public class TicketServiceImpl implements TicketService {
     private final UserRepository userRepository;
     private final OrderMapper orderMapper;
 
-    public TicketServiceImpl(TicketRepository ticketRepository, TicketMapper ticketMapper, OrderService orderService, OrderRepository orderRepository, UserRepository userRepository, OrderMapper orderMapper) {
+    public TicketServiceImpl(final TicketRepository ticketRepository, final TicketMapper ticketMapper, final OrderService orderService, final OrderRepository orderRepository, final UserRepository userRepository, final OrderMapper orderMapper) {
         this.ticketRepository = ticketRepository;
         this.ticketMapper = ticketMapper;
         this.orderService = orderService;
@@ -37,8 +37,8 @@ public class TicketServiceImpl implements TicketService {
     }
 
     @Override
-    public TicketDto createTicket(TicketDto ticketDto){
-        Ticket ticket = ticketMapper.toEntity(ticketDto);
+    public TicketDto createTicket(final TicketDto ticketDto){
+        final Ticket ticket = ticketMapper.toEntity(ticketDto);
         ticketRepository.save(ticket);
         return ticketMapper.toDTO(ticket);
     }
@@ -55,8 +55,8 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public List<TicketDto> getTicketsByOrderId(final Long orderId){
-        OrderDto orderDto = orderService.getById(orderId);
-        List<Ticket> ticketList = orderDto.getTickets();
+        final OrderDto orderDto = orderService.getById(orderId);
+        final List<Ticket> ticketList = orderDto.getTickets();
         if (ticketList==null){
             throw new ServiceException(400,"Ticket list is empty",null);
         }
@@ -65,21 +65,21 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public TicketDto updateTicket(final TicketDto ticketDto){
-        Ticket ticket = ticketMapper.toEntity(ticketDto);
+        final Ticket ticket = ticketMapper.toEntity(ticketDto);
         return ticketMapper.toDTO(ticketRepository.update(ticket));
     }
 
     @Override
     public List<TicketDto> deleteTicketById(final Long id){
-        List<Ticket> newTicketList = ticketRepository.delete(id);
+        final List<Ticket> newTicketList = ticketRepository.delete(id);
         return newTicketList.stream().map(ticketMapper::toDTO).collect(Collectors.toList());
     }
 
     @Override
-    public OrderDto addTicketToOrder(long orderId, long ticketId) {
-        Order order = orderRepository.getById(orderId);
-        Ticket ticket = ticketRepository.getById(ticketId);
-        User user = userRepository.getById(order.getUserId());
+    public OrderDto addTicketToOrder(final long orderId, final long ticketId) {
+        final Order order = orderRepository.getById(orderId);
+        final Ticket ticket = ticketRepository.getById(ticketId);
+        final User user = userRepository.getById(order.getUserId());
         List<Ticket> tickets = order.getTickets();
         if (tickets == null) {
             tickets = new ArrayList<>();
