@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<UserDto> deleteUser(final Long id){
-        return userRepository.delete(id).stream().map(userMapper::toDTO).collect(Collectors.toList());
+    public void deleteUserById(final Long id){
+        userRepository.deleteUserById(id);
     }
 }

@@ -1,11 +1,16 @@
 package lpnu.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lpnu.entity.enumeration.UserRole;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-@Data
+@Data /*Geter Seter equals hashcode tostring*/
+@NoArgsConstructor
+@AllArgsConstructor
 public class UserDto {
     private Long id;
 
@@ -17,4 +22,6 @@ public class UserDto {
     private String email;
     @NotBlank
     private String number;
+    @NotBlank
+    private UserRole role;
 }

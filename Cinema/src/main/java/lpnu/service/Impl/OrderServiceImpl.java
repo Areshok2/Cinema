@@ -37,14 +37,14 @@ public class OrderServiceImpl implements OrderService {
     public List<OrderDto> getAllByUserId(final Long userId) {
         final User user = userRepository.getById(userId);
         return orderRepository.getByUserId(userId).stream()
-                .map((order) -> orderMapper.toDTO(order, user))
+                .map((e) -> orderMapper.toDTO(e, user))
                 .collect(Collectors.toList());
     }
 
     @Override
     public List<OrderDto> getAll() {
         return orderRepository.getAll().stream()
-                .map(order -> orderMapper.toDTO(order, userRepository.getById(order.getId())))
+                .map(e -> orderMapper.toDTO(e, userRepository.getById(e.getId())))
                 .collect(Collectors.toList());
     }
 

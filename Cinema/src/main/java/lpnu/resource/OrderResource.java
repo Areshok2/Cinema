@@ -2,6 +2,7 @@ package lpnu.resource;
 
 import lpnu.dto.OrderDto;
 import lpnu.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 public class OrderResource {
+
+    @Autowired
     private final OrderService orderService;
 
     public OrderResource(final OrderService orderService) {

@@ -2,6 +2,8 @@ package lpnu.resource;
 
 import lpnu.dto.UserDto;
 import lpnu.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,6 +11,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/v1")
 public class UserResource {
+
+    @Autowired
     private final UserService userService;
 
     public UserResource(final UserService userService) {
@@ -36,7 +40,8 @@ public class UserResource {
     }
 
     @DeleteMapping("/user/{id}")
-    public List<UserDto> deleteUserById(@PathVariable final Long id) {
-        return userService.deleteUser(id);
+    public ResponseEntity deleteUserById(@PathVariable final Long id){
+        userService.deleteUserById(id);
+        return ResponseEntity.ok().build();
     }
 }

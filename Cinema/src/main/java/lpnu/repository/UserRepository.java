@@ -14,6 +14,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class UserRepository {
@@ -73,14 +74,14 @@ public class UserRepository {
         final User user = userList.stream()
                 .filter((e -> e.getId().equals(id)))
                 .findFirst()
-                .orElseThrow(() -> new ServiceException(400, "Usser not found", null));
+                .orElseThrow(() -> new ServiceException(400, "User with id: " + id + " not found ", null));
 
         return user;
     }
 
     public User update(final User user) {
         final User oldTicket = getById(user.getId());
-        if (oldTicket==null){
+        if (oldTicket == null){
             throw new ServiceException(400,"User not found", null);
         }
         userList.remove(oldTicket);
@@ -89,12 +90,10 @@ public class UserRepository {
         return user;
     }
 
-    public  List<User> delete(final Long id){
-        final User user = getById(id);
-        if(user==null){
-            throw new ServiceException(400, "User not found", null);
-        }
-        userList.remove(user);
-        return userList;
+    public void deleteUserById(final Long id) {
+        userList = userList.stream()
+                .filter(e -> e.getId() != id)
+                .collect(Collectors.toList());
     }
 }
+

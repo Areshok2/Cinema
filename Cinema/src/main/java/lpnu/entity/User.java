@@ -1,11 +1,16 @@
 package lpnu.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lpnu.entity.enumeration.UserRole;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class User {
     private Long id;
     @NotBlank
@@ -16,4 +21,6 @@ public class User {
     private String email;
     @NotBlank
     private String number;
+    @NotBlank
+    private UserRole role;
 }
