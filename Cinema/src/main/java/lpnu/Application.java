@@ -10,15 +10,3 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 }
-/*
-
-05.12   add role
-        add authrisation
-
-
-
-
-
-
-
-*/
