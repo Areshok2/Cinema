@@ -15,11 +15,13 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class Ticket {
     private Long id;
+
     @NotBlank
     private String filmName;
     @NotBlank
     private String description;
-    private LocalDate dateOfPerformance;
+
+    private LocalDate date;
 
     @Min(1)
     @Max(200)

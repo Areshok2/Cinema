@@ -7,6 +7,7 @@ import lpnu.mapper.OrderMapper;
 import lpnu.repository.OrderRepository;
 import lpnu.repository.UserRepository;
 import lpnu.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,8 +15,12 @@ import java.util.stream.Collectors;
 
 @Service
 public class OrderServiceImpl implements OrderService {
+
+    @Autowired
     private final OrderRepository orderRepository;
+    @Autowired
     private final OrderMapper orderMapper;
+    @Autowired
     private final UserRepository userRepository;
 
     public OrderServiceImpl(final OrderRepository orderRepository, final OrderMapper orderMapper, final UserRepository userRepository) {

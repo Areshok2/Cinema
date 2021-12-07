@@ -57,20 +57,22 @@ public class TicketRepository {
         }
     }
 
+    public Ticket getById(final Long id){
+        return ticketList.stream()
+                .filter((e -> e.getId().equals(id)))
+                .findFirst()
+                .orElseThrow(()-> new ServiceException(400,"Ticket with id: " + id + " not found",null));
+    }
+
     public List<Ticket> getAll(){
         return ticketList;
     }
 
-    public Ticket getById(final Long id){
-        final Ticket ticket = ticketList.stream()
-                .filter((e -> e.getId().equals(id)))
-                .findFirst()
-                .orElseThrow(()-> new ServiceException(400,"Ticket not found",null));
-
-        return ticket;
-    }
-
     public Ticket save(final Ticket ticket){
+        if(ticket.getId() != null){
+            throw new ServiceException(400, "Ticket shouldn't have an id ", null);
+        }
+
         ++lastId;
         ticket.setId(lastId);
         ticketList.add(ticket);
@@ -78,14 +80,19 @@ public class TicketRepository {
     }
 
     public Ticket update(final Ticket ticket) {
-        final Ticket oldTicket = getById(ticket.getId());
-        if (oldTicket==null){
-            throw new ServiceException(400,"Ticket not found", null);
-        }
-        ticketList.remove(oldTicket);
-        ticketList.add(ticket);
 
-        return ticket;
+        if(ticket.getId() == null){
+            throw new ServiceException(400, "Ticket shouldn't have an id ", null);
+        }
+
+        final  Ticket savedTicket = getById(ticket.getId());
+
+        savedTicket.setFilmName(ticket.getFilmName());
+        savedTicket.setDescription(ticket.getDescription());
+        savedTicket.setDate(ticket.getDate());
+        savedTicket.setPrice(ticket.getPrice());
+
+        return savedTicket;
     }
 
     public  List<Ticket> delete(final Long id){
@@ -97,5 +104,4 @@ public class TicketRepository {
 
         return ticketList;
     }
-
 }

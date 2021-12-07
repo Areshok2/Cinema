@@ -14,7 +14,6 @@ public class OrderMapper {
         orderDTO.setTickets(order.getTickets());
         orderDTO.setSum(order.getSum());
 
-
         if (user != null) {
             orderDTO.setUserId(user.getId());
             orderDTO.setFirstname(user.getFirstname());

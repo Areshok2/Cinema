@@ -57,31 +57,36 @@ public class OrderRepository {
         }
     }
 
+    public Order getById(final Long id) {
+        return orderList.stream()
+                .filter((e -> e.getId().equals(id)))
+                .findFirst()
+                .orElseThrow(()-> new ServiceException(400,"Order with id: " + id + " not found",null));
+    }
+
     public List<Order> getAll() {
         return orderList;
     }
 
     public Order save(final Order order) {
+        if(order.getId() != null){
+            throw new ServiceException(400, "Order shouldn't have an id ", null);
+        }
+
         ++lastId;
         order.setId(lastId);
         orderList.add(order);
         return order;
     }
 
-    public Order getById(final Long id) {
-        final Order order = orderList.stream()
-                .filter((e -> e.getId().equals(id)))
-                .findFirst()
-                .orElseThrow(()-> new ServiceException(400,"User not found",null));
-
-        return order;
-    }
-
     public Order update(final Order order) {
-        if (order.getId()==null){
-            throw new ServiceException(400,"Order not found", null);
+
+        if (order.getId() == null){
+            throw new ServiceException(400,"Order shouldn't have an id", null);
         }
+
         final Order oldOrder = getById(order.getId());
+
         orderList.remove(oldOrder);
         orderList.add(order);
         return order;

@@ -58,11 +58,21 @@ public class UserRepository {
         }
     }
 
+    public User getById(final Long id) {
+        return userList.stream()
+                .filter(e -> e.getId().equals(id))
+                .findFirst()
+                .orElseThrow(() -> new ServiceException(400, "User with id: " + id + " not found ", null));
+    }
+
     public List<User> getAll() {
         return userList;
     }
 
     public User save(final User user) {
+        if(user.getId() != null){
+            throw new ServiceException(400, "User shouldn't have an id ", null);
+        }
         ++lastId;
         user.setId(lastId);
         userList.add(user);
@@ -70,24 +80,20 @@ public class UserRepository {
         return user;
     }
 
-    public User getById(final Long id) {
-        final User user = userList.stream()
-                .filter((e -> e.getId().equals(id)))
-                .findFirst()
-                .orElseThrow(() -> new ServiceException(400, "User with id: " + id + " not found ", null));
-
-        return user;
-    }
-
     public User update(final User user) {
-        final User oldTicket = getById(user.getId());
-        if (oldTicket == null){
-            throw new ServiceException(400,"User not found", null);
-        }
-        userList.remove(oldTicket);
-        userList.add(user);
 
-        return user;
+        if(user.getId() == null){
+            throw new ServiceException(400, "User shouldn't have an id ", null);
+        }
+
+        final User savedUser = getById(user.getId());
+        savedUser.setFirstname(user.getFirstname());
+        savedUser.setLastname(user.getLastname());
+        savedUser.setEmail(user.getEmail());
+        savedUser.setNumber(user.getNumber());
+        savedUser.setRole(user.getRole());
+
+        return savedUser;
     }
 
     public void deleteUserById(final Long id) {

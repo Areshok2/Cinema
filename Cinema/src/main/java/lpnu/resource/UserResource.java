@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class UserResource {
     }
 
     @PostMapping("/user/")
-    public UserDto createUser(@RequestBody final UserDto userDto) {
+    public UserDto createUser(@Valid @RequestBody final UserDto userDto) {
         return userService.createUser(userDto);
     }
 

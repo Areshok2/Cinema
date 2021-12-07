@@ -20,8 +20,7 @@ public class TicketDto {
     private String filmName;
     @NotBlank
     private String description;
-    private LocalDate dateOfPerformance;
-
+    private LocalDate date;
     @Min(1)
     @Max(200)
     @NotNull

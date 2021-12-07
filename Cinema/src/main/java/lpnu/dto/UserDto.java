@@ -8,7 +8,7 @@ import lpnu.entity.enumeration.UserRole;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
-@Data /*Geter Seter equals hashcode tostring*/
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class UserDto {
@@ -22,6 +22,6 @@ public class UserDto {
     private String email;
     @NotBlank
     private String number;
-    @NotBlank
+
     private UserRole role;
 }

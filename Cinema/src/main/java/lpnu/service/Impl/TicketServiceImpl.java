@@ -13,6 +13,7 @@ import lpnu.repository.TicketRepository;
 import lpnu.repository.UserRepository;
 import lpnu.service.OrderService;
 import lpnu.service.TicketService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -20,11 +21,18 @@ import java.util.List;
 import java.util.stream.Collectors;
 @Service
 public class TicketServiceImpl implements TicketService {
+
+    @Autowired
     private final TicketRepository ticketRepository;
+    @Autowired
     private final TicketMapper ticketMapper;
+    @Autowired
     private final OrderService orderService;
+    @Autowired
     private final OrderRepository orderRepository;
+    @Autowired
     private final UserRepository userRepository;
+    @Autowired
     private final OrderMapper orderMapper;
 
     public TicketServiceImpl(final TicketRepository ticketRepository, final TicketMapper ticketMapper, final OrderService orderService, final OrderRepository orderRepository, final UserRepository userRepository, final OrderMapper orderMapper) {
