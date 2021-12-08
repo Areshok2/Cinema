@@ -69,6 +69,7 @@ public class TicketRepository {
     }
 
     public Ticket save(final Ticket ticket){
+
         if(ticket.getId() != null){
             throw new ServiceException(400, "Ticket shouldn't have an id ", null);
         }
@@ -97,9 +98,11 @@ public class TicketRepository {
 
     public  List<Ticket> delete(final Long id){
         final Ticket ticket = getById(id);
+
         if(ticket==null){
             throw new ServiceException(400, "Ticket not found", null);
         }
+
         ticketList.remove(ticket);
 
         return ticketList;

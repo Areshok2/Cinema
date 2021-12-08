@@ -3,6 +3,7 @@ package lpnu.service.Impl;
 import lpnu.dto.OrderDto;
 import lpnu.entity.Order;
 import lpnu.entity.User;
+import lpnu.exception.ServiceException;
 import lpnu.mapper.OrderMapper;
 import lpnu.repository.OrderRepository;
 import lpnu.repository.UserRepository;
@@ -31,6 +32,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto createOrder(final OrderDto orderDto) {
+
+        if(orderDto.getId() != null){
+            throw new ServiceException(400, "Order shouldn't have an id ", null);
+        }
+
         final User user = userRepository.getById(orderDto.getUserId());
         final Order order = orderMapper.toEntity(orderDto);
         final Order savedOrder = orderRepository.save(order);
@@ -41,6 +47,7 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderDto> getAllByUserId(final Long userId) {
         final User user = userRepository.getById(userId);
+
         return orderRepository.getByUserId(userId).stream()
                 .map((e) -> orderMapper.toDTO(e, user))
                 .collect(Collectors.toList());
@@ -63,6 +70,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDto updateOrder(final OrderDto orderDto) {
+
+        if(orderDto.getId() == null){
+            throw new ServiceException(400, "Order doesn't have an id ", null);
+        }
+
         final Order order = orderMapper.toEntity(orderDto);
         final Order updatedOrder = orderRepository.update(order);
 

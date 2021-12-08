@@ -70,6 +70,7 @@ public class UserRepository {
     }
 
     public User save(final User user) {
+
         if(user.getId() != null){
             throw new ServiceException(400, "User shouldn't have an id ", null);
         }

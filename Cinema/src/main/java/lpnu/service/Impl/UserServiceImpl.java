@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(400, "User shouldn't have an id ", null);
         }
         final User user = userMapper.toEntity(userDto);
+
         return userMapper.toDTO(userRepository.save(user));
     }
 
@@ -38,7 +39,7 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> getAll() {
 
         return userRepository.getAll().stream()
-                .map(e -> userMapper.toDTO(e))
+                .map(user -> userMapper.toDTO(user))
                 .collect(Collectors.toList());
     }
 
