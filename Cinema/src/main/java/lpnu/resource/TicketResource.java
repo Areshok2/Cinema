@@ -25,6 +25,11 @@ public class TicketResource {
         return ticketService.createTicket(ticketDto);
     }
 
+    @PostMapping("/ticket/addToOrder/{orderId}/ticket/{ticketId}")
+    public OrderDto addTicketToOrder(@PathVariable final Long orderId, @PathVariable final Long ticketId){
+        return ticketService.addTicketToOrder(orderId, ticketId);
+    }
+
     @GetMapping("/ticket/{id}")
     public TicketDto getTicketById(@PathVariable final Long id) {
         return ticketService.getTicketById(id);
@@ -38,11 +43,6 @@ public class TicketResource {
     @GetMapping("/ticket/")
     public List<TicketDto> getAll() {
         return ticketService.getAll();
-    }
-
-    @GetMapping("/ticket/addToOrder/{orderId}/ticket/{ticketId}")
-    public OrderDto addTicketToOrder(@PathVariable final Long orderId, @PathVariable final Long ticketId){
-        return ticketService.addTicketToOrder(orderId, ticketId);
     }
 
     @PutMapping("/ticket/")

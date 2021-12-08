@@ -82,9 +82,7 @@ public class TicketServiceImpl implements TicketService {
 
     @Override
     public TicketDto updateTicket(final TicketDto ticketDto){
-        final Ticket ticket = ticketMapper.toEntity(ticketDto);
-
-        return ticketMapper.toDTO(ticketRepository.update(ticket));
+        return ticketMapper.toDTO(ticketRepository.update(ticketMapper.toEntity(ticketDto)));
     }
 
     @Override

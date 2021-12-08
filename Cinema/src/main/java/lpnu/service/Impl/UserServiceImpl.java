@@ -7,6 +7,7 @@ import lpnu.mapper.UserMapper;
 import lpnu.repository.UserRepository;
 import lpnu.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -31,20 +32,20 @@ public class UserServiceImpl implements UserService {
             throw new ServiceException(400, "User shouldn't have an id ", null);
         }
         final User user = userMapper.toEntity(userDto);
-
         return userMapper.toDTO(userRepository.save(user));
     }
 
     @Override
     public List<UserDto> getAll() {
-
         return userRepository.getAll().stream()
-                .map(user -> userMapper.toDTO(user))
+                .map(userMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
+    @Cacheable("getUserById")
     @Override
-    public UserDto getUserById(final Long id) {
+    public UserDto getUserById(final Long id) throws InterruptedException {
+        Thread.sleep(2000);
         return userMapper.toDTO(userRepository.getById(id));
     }
 

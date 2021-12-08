@@ -9,7 +9,7 @@ public interface UserService {
 
     List<UserDto> getAll();
 
-    UserDto getUserById(Long id);
+    UserDto getUserById(Long id) throws InterruptedException;
 
     UserDto updateUser(UserDto userDto);
 

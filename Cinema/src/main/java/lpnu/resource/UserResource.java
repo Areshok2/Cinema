@@ -31,7 +31,7 @@ public class UserResource {
     }
 
     @GetMapping("/user/{id}")
-    public UserDto getById(@PathVariable final Long id) {
+    public UserDto getById(@PathVariable final Long id) throws InterruptedException {
         return userService.getUserById(id);
     }
 
