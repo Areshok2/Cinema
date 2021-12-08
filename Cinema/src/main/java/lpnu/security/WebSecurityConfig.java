@@ -20,7 +20,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.inMemoryAuthentication()
                 .withUser("user").password(passwordEncoder().encode(("user"))).roles("USER")
                 .and()
-                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN");
+                .withUser("admin").password(passwordEncoder().encode("admin")).roles("ADMIN", "USER");
 
     }
 
@@ -36,15 +36,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.GET, "/api/v1/user/**").hasRole("USER")
                 .antMatchers(HttpMethod.GET, "/api/v1/ticket/**").hasRole("USER")
                 .antMatchers(HttpMethod.GET, "/api/v1/order/**").hasRole("USER")
-
-
+                
                 .antMatchers(HttpMethod.POST, "/api/v1/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.PUT, "/api/v1/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.GET, "/api/v1/**").hasRole("ADMIN")
                 .antMatchers(HttpMethod.DELETE, "/api/v1/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/api/v1/user/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/api/v1/ticket/**").hasRole("ADMIN")
-                .antMatchers(HttpMethod.GET, "/api/v1/order/**").hasRole("ADMIN")
 
                 .and()
                 .csrf().disable()
