@@ -108,7 +108,7 @@ public class TicketServiceImpl implements TicketService {
 
         tickets.add(ticket);
         order.setTickets(tickets);
-        order.setSum(tickets.stream().map(ticket1 -> ticket1.getPrice()).reduce(0.0, Double::sum));
+        order.setSum(tickets.stream().map(Ticket::getPrice).reduce(0.0, Double::sum));
 
         return orderMapper.toDTO(orderRepository.update(order), user);
     }
